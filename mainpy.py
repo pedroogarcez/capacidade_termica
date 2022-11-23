@@ -5,7 +5,7 @@ import tkinter as tk
 
 #Implmentando a função de Debye
 
-lista_temperatura = [1,2,3,4,5]
+lista_temperatura = np.arange(0,100,2)
 valor_x = []
 def calor_especifico(lista_temperatura):
     r = 8.31451
@@ -25,7 +25,10 @@ d = lambda u: (u**4 * np.exp(u))/(np.exp(u)*1)**2
 integral = scipy.integrate.quad(d,1,5)
 #print(integral)
 
+
+'''
 janela = tk.Tk()
 janela.title('Capacidade térmica dos materiais')
 janela.geometry('400x150')
 janela.mainloop()
+'''
