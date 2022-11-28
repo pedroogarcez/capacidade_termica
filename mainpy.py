@@ -5,7 +5,7 @@ from tkinter import *
 
 #Implmentando a função de Debye
 
-lista_temperatura = [1,2,3,4,5]
+lista_temperatura = np.arange(0,100,2)
 valor_x = []
 def calor_especifico(lista_temperatura):
     r = 8.31451
@@ -25,7 +25,13 @@ d = lambda u: (u**4 * np.exp(u))/(np.exp(u)*1)**2
 integral = scipy.integrate.quad(d,1,5)
 #print(integral)
 
+<<<<<<< HEAD
 janela = Tk()
+=======
+
+'''
+janela = tk.Tk()
+>>>>>>> 739efcf72e8372796df5876362853ef40fa08e0b
 janela.title('Capacidade térmica dos materiais')
 janela.geometry('400x150')
 
@@ -68,3 +74,4 @@ Button(text='Cacular',command=retorna_tetad).place(x=330,y=10)
 
 
 janela.mainloop()
+'''
