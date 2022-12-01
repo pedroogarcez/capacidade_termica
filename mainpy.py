@@ -25,13 +25,8 @@ d = lambda u: (u**4 * np.exp(u))/(np.exp(u)*1)**2
 integral = scipy.integrate.quad(d,1,5)
 #print(integral)
 
-<<<<<<< HEAD
-janela = Tk()
-=======
 
-'''
-janela = tk.Tk()
->>>>>>> 739efcf72e8372796df5876362853ef40fa08e0b
+janela = Tk()
 janela.title('Capacidade térmica dos materiais')
 janela.geometry('400x150')
 
@@ -51,15 +46,9 @@ def retorna_tetad():
         for i in range(len(temperatura)):
             t = temperatura[i]
             x = tetad/t
-        Label(text=f'{x}',font='15').place(x=166,y=88)
-
-
-
 
     else:
-        Label(text='Material não encontrado',font='15').grid(row=1, column=1)
-
-# -- Material informado
+        Label(text=f'{x}',font='15').place(x=166,y=88)
 material = StringVar()
 m = Entry(janela, textvariable=material, width=25)
 m.place(x=170,y=15)
@@ -69,9 +58,4 @@ m.place(x=170,y=15)
 # -- Botão calcular
 Button(text='Cacular',command=retorna_tetad).place(x=330,y=10)
 
-# -- tetad
-
-
-
 janela.mainloop()
-'''
