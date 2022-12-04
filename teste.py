@@ -3,7 +3,7 @@ import numpy as np
 from tkinter import *
 import pandas as pd
 from tkinter import ttk
-
+from calculator import x_calculator
 
 # -- Criando a base de dados com dicionário
 df = pd.read_csv('debye - Página1.csv')
@@ -31,25 +31,24 @@ combo = ttk.Combobox(values=lista_material,textvariable=StringVar())
 combo.place(x=190,y=23)
 mat_informado = combo.get()
 
-
-# -- Criandoo a função que calcula a integral a partir do material informado no "combobox"
-
-
-# --
-
+def printa():
+    print(mat_informado)
 
 # -- Criando o botão slider para Temp Mín
-slide1 = Scale(janela,from_=10,to=500,orient=HORIZONTAL)
+slide1 = Scale(janela,from_=10,to=490,orient=HORIZONTAL)
 slide1.place(x=40,y=125)
 t_min = slide1.get
 
 # -- Criando o botão slider para Temp Máx.
-slide2 = Scale(janela,from_=10,to=500,orient=HORIZONTAL)
+slide2 = Scale(janela,from_=50,to=500,orient=HORIZONTAL)
 slide2.place(x=220,y=125)
 t_max = slide2.get()
 
 
-# -- Criando uma função que calcula os valores de x de acordo com o material informado e os valores de tmin e tmax
+
+
+
+
 
 
 
@@ -63,7 +62,7 @@ t_max = slide2.get()
 
 # -- Criando o botão
 Button(text='Limpar',width=10).place(x=25,y=190)
-Button(text='Gerar gráfico',width=10).place(x=145,y=190)
+Button(text='Gerar gráfico',width=10,command=printa).place(x=145,y=190)
 Button(text='Sair',width=10,command=janela.destroy).place(x=270,y=190)
 # --
 
