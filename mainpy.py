@@ -2,6 +2,7 @@
 import scipy.integrate
 import numpy as np
 from tkinter import *
+import debye_luis_eleno as db
 
 
 d = lambda u: (u**4 * np.exp(u))/(np.exp(u)*1)**2
