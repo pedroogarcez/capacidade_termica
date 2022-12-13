@@ -2,13 +2,13 @@
 import scipy.integrate
 import numpy as np
 from tkinter import *
-import debye_luis_eleno as db
+import debye_calculator as db
 
 
 d = lambda u: (u**4 * np.exp(u))/(np.exp(u)*1)**2
 integral = scipy.integrate.quad(d,1,5)
 
-
+x
 janela = Tk()
 
 janela.title('Capacidade térmica dos materiais')

@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import debye_luis_eleno as db
+import debye_calculator as db
 import pandas as pd
 from tkinter import *
 from tkinter import ttk
@@ -18,11 +18,13 @@ janela = Tk()
 # -- Definindo o título da janela
 janela.title('Capacidade térmica dos materiais')
 # -- Definindo o tamanho da janela
+janela.geometry('390x220')
+# -- Fixando o tamanho da janela
+janela.resizable(False,False)
 
-janela.geometry('400x200')
 # -- Definindo e posicionando os textos da janela
 t1 = Label(janela,text= 'Determine o Material',font='Times 15').place(x=16,y=15)
-t2 = Label(janela,text='Θd:',font='Times 15').place(x=160,y=53)
+t2 = Label(janela,text='Escola de Engenharia de Lorena',font='Times 6').place(x=135,y=195)
 t3 = Label(janela,text='T Mín:',font='Times 15').place(x=80,y=80)
 t4 = Label(janela,text='T Máx:',font='Times 15').place(x=240,y=80)
 
@@ -31,52 +33,60 @@ Combo = ttk.Combobox(janela, values = lista_material)
 Combo.place(x=200,y=19)
 Combo.set(lista_material[0])
 
-# -- Definindo e posicionando o botão slider
+# -- Definindo e posicionando os botões slider
 slider1 = Scale(janela, from_=10, to=500, orient=HORIZONTAL)
 slider1.place(x=60,y=100)
 slider2 = Scale(janela, from_=10, to=500, orient=HORIZONTAL)
 slider2.place(x=220,y=100)
 
-# -- Criando a função que irá gerar nosso gráfico
+# -- Criando a função que irá calcular o calor específico e gerar nosso gráfico
 def grafico():
     material = Combo.get()
     t_min = slider1.get()
     t_max = slider2.get()
+
     if t_min<t_max:
         debye_material = db.Debye(dicionario[material])
         T = np.linspace(t_min, t_max, 201)
         w = debye_material.SpecificHeat(T)
         plt.plot(T,debye_material.SpecificHeat(T))
         plt.title(f'{material} (Θd: {dicionario[material]}K)')
-        plt.ylabel('cv (J/molK)')
-
+        plt.ylabel('Specific heat (J/molK)')
+        plt.xlabel('Temperature (K)')
         plt.show()
-
-
     else:
-        messagebox.showerror(u'Error', u'T. Mín >= T. Máx.\nAltere os valores.')
+        messagebox.showerror(u'Error', u'T. Mín >= T. Máx\nAltere os valores')
 
 # -- Criando o botão quit e plot
-b1 = Button(janela,text='Exit',command=janela.destroy,width=8).place(x=240,y=160)
-b2 = Button(janela,text='Plot',width=8,command=grafico).place(x=90,y=160)
+b1 = Button(janela,text='Exit',command=janela.destroy,width=8).place(x=220,y=160)
+b2 = Button(janela,text='Plot',width=8,command=grafico).place(x=85,y=160)
+
 janela.mainloop()
 
+# -- Caso o material não faça parte do banco de dados
+input1 = str(input('Informe o material: '))
+input2 = int(input('Informe a temperatura de Debye do material (K): '))
 
-
-exit()
-
-'''
-material_informado = str(input('Informe o material'))
-debye_material = db.Debye(dicionario[material_informado])
+temp_debye = db.Debye(input2)
 
 #Tmin, Tmax, NT = 5, 500, 201
-Tmin = int(input('Informe a temperatura mínima'))
-Tmax = int(input('Informe a temperatura máxima'))
+Tmin = int(input('Informe a temperatura mínima (K): '))
+Tmax = int(input('Informe a temperatura máxima (K): '))
 NT = 201
-T = np.linspace(Tmin,Tmax,NT)
 
-plt.plot(T,debye_material.SpecificHeat(T))
-plt.title(f'{material_informado}')
-plt.show()
+if Tmin<Tmax:
+    T = np.linspace(Tmin,Tmax+1,NT)
+else:
+    T = np.linspace(Tmax,Tmin,NT)
 
-'''
+if Tmin == 0:
+    print('Error: x = tetad/0: indeterminação')
+else:
+    plt.plot(T,temp_debye.SpecificHeat(T))
+    plt.title(f'{input1} (Θd: {input2} K)')
+    plt.ylabel('Specific heat (J/molK)')
+    plt.xlabel('Temperature (K)')
+    plt.show()
+
+
+
