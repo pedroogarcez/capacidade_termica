@@ -6,11 +6,13 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 
+
 # -- Criando um dicionário com os valores das tabelas
 df = pd.read_csv('debye - Página1.csv')
 lista_material = df['material'].tolist()
 lista_temperatura = df['temperatura de debye [K]'].tolist()
 dicionario = dict(zip(lista_material,lista_temperatura))
+
 # --
 
 
@@ -87,6 +89,8 @@ else:
     plt.ylabel('Specific heat (J/molK)')
     plt.xlabel('Temperature (K)')
     plt.show()
+
+
 
 
 
