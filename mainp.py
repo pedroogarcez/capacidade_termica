@@ -65,6 +65,7 @@ b2 = Button(janela,text='Plot',width=8,command=grafico).place(x=85,y=160)
 
 janela.mainloop()
 
+
 # -- Caso o material não faça parte do banco de dados
 input1 = str(input('Informe o material: '))
 input2 = int(input('Informe a temperatura de Debye do material (K): '))
